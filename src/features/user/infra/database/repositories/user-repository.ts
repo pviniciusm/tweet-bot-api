@@ -2,8 +2,9 @@ import { IUser } from "./../../../domain/contracts/user";
 import { getRepository, Repository } from "typeorm";
 
 import { User } from "../../../../../core/infra/database/entities/user";
+import { IUserRepository } from "../../../domain/contracts/user-repository";
 
-export class UserRepository {
+export class UserRepository implements IUserRepository {
     private _repository: Repository<User>;
 
     constructor() {
@@ -24,4 +25,6 @@ export class UserRepository {
     async list(): Promise<User[]> {
         return await this._repository.find();
     }
+
+    async delete(username: string) {}
 }

@@ -11,7 +11,7 @@
         "test:setup": "rimraf ./dbtest.sqlite && rimraf ./tests/core/infra/database/migrations && cross-env NODE_ENV=test npm run typeorm migration:generate -- -n TestsMigration && cross-env NODE_ENV=test npm run typeorm migration:run",
         "test:integration": "cross-env NODE_ENV=test jest --silent --noStackTrace --runInBand",
         "test:coverage": "jest --silent --noStackTrace --runInBand --coverage",
-        "test:watch": "jest --silent --noStackTrace --runInBand --watchAll",
+        "test:watch": "jest --noStackTrace --runInBand --watchAll",
         "test:verbose": "jest --verbose --runInBand"
     },
     "repository": {
