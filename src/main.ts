@@ -1,3 +1,4 @@
+import { RedisConnection } from "./core/infra/database/connections/redis-connection";
 import { DatabaseConnection } from "./core/infra/database/connections/database-connection";
 import { Server } from "./core/presentation/server/index";
 import express from "express";
@@ -14,4 +15,7 @@ app.get("/", (req, res) =>
     })
 );
 
-DatabaseConnection.initialize().then(Server.initialize);
+DatabaseConnection.initialize().then(() => {
+    RedisConnection.initialize();
+    Server.initialize();
+});
