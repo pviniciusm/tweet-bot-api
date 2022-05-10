@@ -1,6 +1,6 @@
 module.exports = {
-    type: "sqlite",
-    database: "db.sqlite3",
+    type: "postgres",
+    url: process.env.DB_URL,
     entities: ["src/core/infra/database/entities/*.ts"],
     migrations: ["src/core/infra/database/migrations/*.ts"],
     logging: false,
@@ -8,5 +8,10 @@ module.exports = {
     cli: {
         entitiesDir: "src/core/infra/database/entities",
         migrationsDir: "src/core/infra/database/migrations",
+    },
+    extra: {
+        ssl: {
+            rejectUnauthorized: false,
+        },
     },
 };
