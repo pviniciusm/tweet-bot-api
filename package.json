@@ -4,10 +4,15 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "ts-node-dev --respawn --transpile-only ./src/main.ts",
         "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-        "postinstall": "npm run typeorm migration:run"
+        "postinstall": "npm run typeorm migration:run",
+        "test": "jest --silent --noStackTrace --runInBand",
+        "test:setup": "rimraf ./dbtest.sqlite && rimraf ./tests/core/infra/database/migrations && cross-env NODE_ENV=test npm run typeorm migration:generate -- -n TestsMigration && cross-env NODE_ENV=test npm run typeorm migration:run",
+        "test:integration": "cross-env NODE_ENV=test jest --silent --noStackTrace --runInBand",
+        "test:coverage": "jest --silent --noStackTrace --runInBand --coverage",
+        "test:watch": "jest --silent --noStackTrace --runInBand --watchAll",
+        "test:verbose": "jest --verbose --runInBand"
     },
     "repository": {
         "type": "git",
@@ -27,11 +32,13 @@
         "express": "^4.17.1",
         "https-proxy-agent": "^5.0.1",
         "ioredis": "^4.28.5",
+        "jest": "^28.1.0",
         "jsonwebtoken": "^8.5.1",
         "pg": "^8.7.3",
         "redis": "^3.1.2",
         "reflect-metadata": "^0.1.13",
         "sqlite3": "^5.0.8",
+        "supertest": "^6.2.3",
         "twitter-api-v2": "^1.12.0",
         "typeorm": "^0.2.45",
         "uuid": "^8.3.2"
@@ -40,9 +47,12 @@
         "@types/cors": "^2.8.12",
         "@types/express": "^4.17.13",
         "@types/ioredis": "^4.28.10",
+        "@types/jest": "^27.5.0",
         "@types/jsonwebtoken": "^8.5.8",
         "@types/node": "^16.11.7",
+        "@types/supertest": "^2.0.12",
         "@types/uuid": "^8.3.1",
+        "ts-jest": "^28.0.2",
         "ts-node-dev": "^1.1.8",
         "typescript": "^4.4.4"
     }
