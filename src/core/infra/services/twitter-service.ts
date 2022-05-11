@@ -1,9 +1,23 @@
+import { TwitterApi } from "twitter-api-v2";
+import "dotenv/config";
+
 export class TwitterService {
-    async initialize() {}
+    private static client: TwitterApi;
 
-    async tweet() {}
+    static async initialize() {
+        if (!this.client) {
+            this.client = new TwitterApi({
+                appKey: process.env.APP_KEY ?? "",
+                appSecret: process.env.APP_SECRET ?? "",
+                accessToken: process.env.ACCESS_TOKEN ?? "",
+                accessSecret: process.env.ACCESS_SECRET ?? "",
+            });
+        }
+    }
 
-    async getTweet() {}
+    static async tweet() {}
 
-    async likeUnlike(like: boolean) {}
+    static async getTweet(id: string) {}
+
+    static async likeUnlike(like: boolean) {}
 }
