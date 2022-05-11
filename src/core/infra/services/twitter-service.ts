@@ -16,10 +16,10 @@ export class TwitterService {
     }
   }
 
-  static async tweet(text: string): Promise<boolean> {
+  static async postTweet(text: string): Promise<boolean | object> {
     const response = await this.client.v2.tweet(text);
     if (!response.data) return false;
-    return true;
+    return { ok: true, tweet: response.data };
   }
 
   static async tweetQuote(id: string, text: string): Promise<Tweet | undefined> {
