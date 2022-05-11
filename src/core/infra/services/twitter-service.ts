@@ -1,4 +1,4 @@
-import { TwitterApi } from "twitter-api-v2";
+import { TwitterApi, UserV2Result } from "twitter-api-v2";
 import "dotenv/config";
 
 export class TwitterService {
@@ -19,5 +19,17 @@ export class TwitterService {
 
     static async getTweet(id: string) {}
 
-    static async likeUnlike(like: boolean) {}
+    static async getLoggedUserId(): Promise<string> {
+        const user = await this.client.v2.me();
+        return user.data.id;
+    }
+
+    static async likeUnlike(userID: string, tweetID: string, like: boolean) {
+        if (like){
+            await this.client.v2.like(userID, tweetID);
+        }
+        else {
+            await this.client.v2.unlike(userID, tweetID);
+        }
+    }
 }
