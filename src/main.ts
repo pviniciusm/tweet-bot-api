@@ -1,3 +1,4 @@
+import { TwitterService } from "./core/infra/services/twitter-service";
 import { RedisConnection } from "./core/infra/database/connections/redis-connection";
 import { DatabaseConnection } from "./core/infra/database/connections/database-connection";
 import { Server } from "./core/presentation/server/index";
@@ -18,4 +19,10 @@ app.get("/", (req, res) =>
 DatabaseConnection.initialize().then(() => {
     RedisConnection.initialize();
     Server.initialize();
+
+    TwitterService.initialize();
+
+    TwitterService.getTweet("1524129781733892097");
+
+    TwitterService.tweet();
 });
