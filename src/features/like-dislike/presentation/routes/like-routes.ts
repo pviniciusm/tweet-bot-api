@@ -13,11 +13,11 @@ export class LikeDislikeRoutes {
         const dislikeTweetUseCase = new DislikeTweetUseCase();
 
         router.post("/", (req: Request, res: Response) => {
-            return new DislikeTweetController(dislikeTweetUseCase).handle(req, res);
+            return new LikeTweetController(likeTweetUseCase).handle(req, res);
         });
 
         router.delete("/",(req: Request, res: Response) => {
-            return new LikeTweetController(likeTweetUseCase).handle(req, res);
+            return new DislikeTweetController(dislikeTweetUseCase).handle(req, res);
         })
 
         return router;

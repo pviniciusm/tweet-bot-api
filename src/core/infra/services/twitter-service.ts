@@ -12,6 +12,7 @@ export class TwitterService {
                 accessToken: process.env.ACCESS_TOKEN ?? "",
                 accessSecret: process.env.ACCESS_SECRET ?? "",
             });
+            this.client.appLogin();
         }
     }
 
@@ -26,9 +27,11 @@ export class TwitterService {
 
     static async likeUnlike(userID: string, tweetID: string, like: boolean) {
         if (like){
+            console.log(`Dando o like do tweet: ${tweetID}`)
             await this.client.v2.like(userID, tweetID);
         }
         else {
+            console.log(`Dando o dislike do tweet: ${tweetID}`)
             await this.client.v2.unlike(userID, tweetID);
         }
     }
