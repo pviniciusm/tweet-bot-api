@@ -14,7 +14,7 @@ export class LikeTweetController {
                 throw new MissingFieldError("TwitterID");
             }
             this.likeTweetUseCase.run(useCaseData);
-            return response.status(200);
+            return response.status(200).send("Foi!");
         }
         catch (error){
             return response.status(400).send(error);
