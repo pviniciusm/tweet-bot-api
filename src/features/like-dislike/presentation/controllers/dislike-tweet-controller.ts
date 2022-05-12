@@ -13,7 +13,7 @@ export class DislikeTweetController {
                 throw new MissingFieldError("TwitterID");
             }
             this.dislikeTweetUseCase.run(useCaseData);
-            return response.status(200);
+            return response.status(200).send("Dis-Foi!");
         }
         catch (error){
             return response.status(400).send(error);
