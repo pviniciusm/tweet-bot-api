@@ -12,7 +12,7 @@ export class LikeTweetController {
             return response.status(200);
         }
         catch (error){
-
+            return response.status(400).send(error);
         }
     }
 }
