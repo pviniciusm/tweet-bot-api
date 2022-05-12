@@ -20,4 +20,20 @@ export class TwitterService {
     static async getTweet(id: string) {}
 
     static async likeUnlike(like: boolean) {}
+
+    static async listFollowers(userId: string) {
+        return await this.client.v2.followers(userId, {
+            max_results: 200,
+        });
+    }
+
+    static async getUser(username: string) {
+        return await this.client.v2.userByUsername(username, {
+            "user.fields": "public_metrics",
+        });
+    }
+
+    static async listTweets() {
+        return await this.client.v2.search("samuel");
+    }
 }
