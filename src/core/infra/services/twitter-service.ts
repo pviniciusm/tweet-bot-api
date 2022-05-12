@@ -1,4 +1,4 @@
-import { SendTweetV2Params, TweetV2PostTweetResult, TwitterApi } from 'twitter-api-v2';
+import { SendTweetV2Params, TweetV2PostTweetResult, TwitterApi, UserV2Result } from 'twitter-api-v2';
 import { Tweet } from '../../domain/models/tweet-model';
 import 'dotenv/config';
 
@@ -57,5 +57,19 @@ export class TwitterService {
     };
   }
 
-  static async likeUnlike(like: boolean) {}
+    static async getLoggedUserId(): Promise<string> {
+    const user = await this.client.v2.me();
+    return user.data.id;
+    }
+
+    static async likeUnlike(userID: string, tweetID: string, like: boolean) {
+        if (like){
+            console.log(`Dando o like do tweet: ${tweetID}`)
+            await this.client.v2.like(userID, tweetID);
+        }
+        else {
+            console.log(`Dando o dislike do tweet: ${tweetID}`)
+            await this.client.v2.unlike(userID, tweetID);
+        }
+    }
 }
