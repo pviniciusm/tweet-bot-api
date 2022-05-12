@@ -21,8 +21,4 @@ DatabaseConnection.initialize().then(() => {
     Server.initialize();
 
     TwitterService.initialize();
-
-    TwitterService.getTweet("1524129781733892097");
-
-    TwitterService.tweet();
 });
